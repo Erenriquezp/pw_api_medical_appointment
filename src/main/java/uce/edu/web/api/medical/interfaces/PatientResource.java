@@ -33,7 +33,7 @@ public class PatientResource {
    @GET
    @Path("")
    @Produces(MediaType.APPLICATION_JSON)
-   //@RolesAllowed({"admin"})
+   @RolesAllowed({"admin"})
    public List<PatientRepresentation> listAll() {
       List<PatientRepresentation> list = new ArrayList<>();
       for (PatientRepresentation patR : this.patientService.getAll()) {
@@ -45,7 +45,7 @@ public class PatientResource {
    @GET
    @Path("/{id}")
    @Produces(MediaType.APPLICATION_JSON)
-   //@RolesAllowed({"admin"})
+   @RolesAllowed({"admin"})
    public PatientRepresentation getById(@PathParam("id") Long id) {
       return this.buildLinks(this.patientService.getById(id));
    }
@@ -54,7 +54,7 @@ public class PatientResource {
    @Path("")
    @Consumes(MediaType.APPLICATION_JSON)
    @Produces(MediaType.APPLICATION_JSON)
-   //RolesAllowed({"admin"})
+   @RolesAllowed({"admin"})
    public Response save(PatientRepresentation docR) {
       this.patientService.create(docR);
       return Response.status(Response.Status.CREATED).entity(docR).build();
