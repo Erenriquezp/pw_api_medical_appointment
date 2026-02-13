@@ -45,7 +45,6 @@ public class DoctorService {
          doc.numOficina = docR.numOficina;
          doc.telefono = docR.telefono;
          doc.email = docR.email;
-         doc.status = docR.status;
          return this.mapper(doc);
       }
       return null;
@@ -73,7 +72,6 @@ public class DoctorService {
          if (docR.email != null) {
             doc.email = docR.email;
          }
-
          return this.mapper(doc);
       }
       return null;
