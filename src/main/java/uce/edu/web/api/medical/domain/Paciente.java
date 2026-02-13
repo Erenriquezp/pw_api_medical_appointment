@@ -19,7 +19,7 @@ public class Paciente extends PanacheEntityBase {
    public Long id;
 
    public String nombre;
-   public String appellido;
+   public String apellido;
    public LocalDate fechaNacimiento;
    public String telefono;
    public String email;

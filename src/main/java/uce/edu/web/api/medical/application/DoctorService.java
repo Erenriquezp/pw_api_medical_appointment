@@ -29,12 +29,14 @@ public class DoctorService {
    }
 
    @Transactional
-   public void create(DoctorRepresentation docR) {
-      this.doctorRepository.persist(this.mapperToDoctor(docR));
+   public DoctorRepresentation create(DoctorRepresentation docR) {
+      Doctor doc = this.mapperToDoctor(docR);
+      this.doctorRepository.persist(doc);
+      return this.mapper(doc);
    }
 
    @Transactional
-   public void update(Long id, DoctorRepresentation docR) {
+   public DoctorRepresentation update(Long id, DoctorRepresentation docR) {
       Doctor doc = this.doctorRepository.findById(id);
       if (doc != null) {
          doc.nombre = docR.nombre;
@@ -43,11 +45,13 @@ public class DoctorService {
          doc.numOficina = docR.numOficina;
          doc.telefono = docR.telefono;
          doc.email = docR.email;
+         return this.mapper(doc);
       }
+      return null;
    }
 
    @Transactional
-   public void partialUpdate(Long id, DoctorRepresentation docR) {
+   public DoctorRepresentation partialUpdate(Long id, DoctorRepresentation docR) {
       Doctor doc = this.doctorRepository.findById(id);
       if (doc != null) {
          if (docR.nombre != null) {
@@ -68,7 +72,9 @@ public class DoctorService {
          if (docR.email != null) {
             doc.email = docR.email;
          }
+         return this.mapper(doc);
       }
+      return null;
    }
 
    @Transactional

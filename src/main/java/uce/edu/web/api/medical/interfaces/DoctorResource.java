@@ -24,7 +24,7 @@ import uce.edu.web.api.medical.application.representation.LinkDto;
 @Path("/doctores")
 public class DoctorResource {
 
-   @Inject 
+   @Inject
    DoctorService doctorService;
 
    @Inject
@@ -33,7 +33,7 @@ public class DoctorResource {
    @GET
    @Path("")
    @Produces(MediaType.APPLICATION_JSON)
-   //@RolesAllowed({"admin"})
+   // @RolesAllowed({"admin"})
    public List<DoctorRepresentation> listAll() {
       List<DoctorRepresentation> list = new ArrayList<>();
       for (DoctorRepresentation docR : this.doctorService.getAll()) {
@@ -45,7 +45,7 @@ public class DoctorResource {
    @GET
    @Path("/{id}")
    @Produces(MediaType.APPLICATION_JSON)
-   @RolesAllowed({"admin"})
+   @RolesAllowed({ "admin" })
    public DoctorRepresentation getById(@PathParam("id") Long id) {
       return this.buildLinks(this.doctorService.getById(id));
    }
@@ -54,45 +54,51 @@ public class DoctorResource {
    @Path("")
    @Consumes(MediaType.APPLICATION_JSON)
    @Produces(MediaType.APPLICATION_JSON)
-   @RolesAllowed({"admin"})
+   @RolesAllowed({ "admin" })
    public Response save(DoctorRepresentation docR) {
-      this.doctorService.create(docR);
-      return Response.status(Response.Status.CREATED).entity(docR).build();
+      DoctorRepresentation created = this.doctorService.create(docR);
+      return Response.status(Response.Status.CREATED).entity(this.buildLinks(created)).build();
    }
 
    @PUT
    @Path("/{id}")
    @Produces(MediaType.APPLICATION_JSON)
    @Consumes(MediaType.APPLICATION_JSON)
-   @RolesAllowed({"admin"})
+   @RolesAllowed({ "admin" })
    public Response update(@PathParam("id") Long id, DoctorRepresentation docR) {
-      this.doctorService.update(id, docR);
-      return Response.status(209).entity(null).build();
+      DoctorRepresentation updated = this.doctorService.update(id, docR);
+      if (updated == null) {
+         return Response.status(Response.Status.NOT_FOUND).build();
+      }
+      return Response.ok(this.buildLinks(updated)).build();
    }
 
    @PATCH
    @Path("/{id}")
    @Produces(MediaType.APPLICATION_JSON)
    @Consumes(MediaType.APPLICATION_JSON)
-   @RolesAllowed({"admin"})
+   @RolesAllowed({ "admin" })
    public Response partialUpdate(@PathParam("id") Long id, DoctorRepresentation docR) {
-      this.doctorService.partialUpdate(id, docR);
-      return Response.status(204).entity(null).build();
+      DoctorRepresentation updated = this.doctorService.partialUpdate(id, docR);
+      if (updated == null) {
+         return Response.status(Response.Status.NOT_FOUND).build();
+      }
+      return Response.ok(this.buildLinks(updated)).build();
    }
 
    @DELETE
    @Path("/{id}")
-   @RolesAllowed({"admin"})
+   @RolesAllowed({ "admin" })
    public void borrar(@PathParam("id") Long id) {
       this.doctorService.delete(id);
    }
 
    private DoctorRepresentation buildLinks(DoctorRepresentation docR) {
       String self = this.uriInfo.getBaseUriBuilder()
-               .path(DoctorResource.class)
-               .path(String.valueOf(docR.id))
-               .build()
-               .toString();
+            .path(DoctorResource.class)
+            .path(String.valueOf(docR.id))
+            .build()
+            .toString();
 
       docR.links = List.of(new LinkDto(self, "self"));
       return docR;

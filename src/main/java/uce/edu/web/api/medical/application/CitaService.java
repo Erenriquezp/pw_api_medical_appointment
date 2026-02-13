@@ -33,6 +33,27 @@ public class CitaService {
       return appointments;
    }
 
+   public CitaRepresentation update(Long id, CitaRepresentation dto) {
+      Cita appointment = appointmentRepository.findById(id);
+      if (appointment != null) {
+         appointment.fechaCita = dto.fechaCita;
+         appointment.status = dto.status;
+
+         Doctor doc = doctorRepository.findById(dto.doctorId);
+         Paciente pat = patientRepository.findById(dto.pacienteId);
+
+         if (doc == null || pat == null) {
+            throw new IllegalArgumentException("Doctor or Patient not found");
+         }
+         appointment.doctor = doc;
+         appointment.paciente = pat;
+
+         appointmentRepository.persist(appointment);
+         return mapToDto(appointment);
+      }
+      throw new IllegalArgumentException("Appointment not found");
+   }
+
    @Transactional
    public CitaRepresentation create(CitaRepresentation dto) {
       Cita appointment = new Cita();
@@ -54,12 +75,14 @@ public class CitaService {
    }
 
    @Transactional
-   public void cancelAppointment(Long id) {
+   public CitaRepresentation cancelAppointment(Long id) {
       Cita app = appointmentRepository.findById(id);
       if (app != null) {
          app.status = "INACTIVA";
          appointmentRepository.persist(app);
+         return mapToDto(app);
       }
+      return null;
    }
 
    private CitaRepresentation mapToDto(Cita entity) {
@@ -70,7 +93,7 @@ public class CitaService {
       dto.doctorId = entity.doctor.id;
       dto.doctor = entity.doctor.nombre + " " + entity.doctor.apellido;
       dto.pacienteId = entity.paciente.id;
-      dto.paciente = entity.paciente.nombre + " " + entity.paciente.appellido;
+      dto.paciente = entity.paciente.nombre + " " + entity.paciente.apellido;
 
       return dto;
    }
