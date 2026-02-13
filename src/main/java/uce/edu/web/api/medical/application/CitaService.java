@@ -37,7 +37,6 @@ public class CitaService {
       Cita appointment = appointmentRepository.findById(id);
       if (appointment != null) {
          appointment.fechaCita = dto.fechaCita;
-         appointment.status = dto.status;
 
          Doctor doc = doctorRepository.findById(dto.doctorId);
          Paciente pat = patientRepository.findById(dto.pacienteId);
