@@ -33,7 +33,7 @@ public class DoctorResource {
    @GET
    @Path("")
    @Produces(MediaType.APPLICATION_JSON)
-   // @RolesAllowed({"admin"})
+   @RolesAllowed({"admin"})
    public List<DoctorRepresentation> listAll() {
       List<DoctorRepresentation> list = new ArrayList<>();
       for (DoctorRepresentation docR : this.doctorService.getAll()) {

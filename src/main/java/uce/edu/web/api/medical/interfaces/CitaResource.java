@@ -2,6 +2,7 @@ package uce.edu.web.api.medical.interfaces;
 
 import java.util.List;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -28,6 +29,7 @@ public class CitaResource {
 
    @GET
    @Produces(MediaType.APPLICATION_JSON)
+   @RolesAllowed({"admin"})
    public List<CitaRepresentation> listAll() {
       return appointmentService.getAll().stream().map(this::buildLinks).toList();
    }
@@ -35,6 +37,7 @@ public class CitaResource {
    @POST
    @Consumes(MediaType.APPLICATION_JSON)
    @Produces(MediaType.APPLICATION_JSON)
+   @RolesAllowed({ "admin" })
    public Response create(CitaRepresentation dto) {
       try {
          CitaRepresentation created = this.appointmentService.create(dto);
@@ -48,6 +51,7 @@ public class CitaResource {
    @Path("/{id}")
    @Consumes(MediaType.APPLICATION_JSON)
    @Produces(MediaType.APPLICATION_JSON)
+   @RolesAllowed({ "admin" })
    public Response update(@PathParam("id") Long id, CitaRepresentation dto) {
       try {
          CitaRepresentation updated = this.appointmentService.update(id, dto);
@@ -59,6 +63,7 @@ public class CitaResource {
 
    @PATCH
    @Path("/{id}/cancelar")
+   @RolesAllowed({ "admin" })
    public Response cancel(@PathParam("id") Long id) {
       CitaRepresentation canceled = appointmentService.cancelAppointment(id);
       if (canceled == null) {

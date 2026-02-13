@@ -107,7 +107,6 @@ public class PacienteService {
       patient.direccion = patientR.direccion;
       patient.email = patientR.email;
       patient.telefono = patientR.telefono;
-      patient.status = patientR.status;
       return patient;
    }
 }

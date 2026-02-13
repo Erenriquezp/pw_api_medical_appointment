@@ -109,7 +109,6 @@ public class DoctorService {
       doc.telefono = docR.telefono;
       doc.numOficina = docR.numOficina;
       doc.email = docR.email;
-      doc.status = docR.status;
       return doc;
    }
 }
