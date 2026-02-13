@@ -89,8 +89,9 @@ public class PacienteResource {
    @DELETE
    @Path("/{id}")
    @RolesAllowed({ "admin" })
-   public void borrar(@PathParam("id") Long id) {
+   public Response borrar(@PathParam("id") Long id) {
       this.patientService.delete(id);
+      return Response.noContent().build();
    }
 
    private PacienteRepresentation buildLinks(PacienteRepresentation patR) {
