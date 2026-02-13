@@ -15,12 +15,12 @@ import jakarta.persistence.GenerationType;
 @Entity
 @Table(name = "appointments")
 @SequenceGenerator(name = "appointment_seq", sequenceName = "appointment_sequence", allocationSize = 1)
-public class Appointment extends PanacheEntityBase {
+public class Cita extends PanacheEntityBase {
    @Id
    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appointment_seq")
    public Long id;
 
-   public LocalDateTime appointmentDate;
+   public LocalDateTime fechaCita;
 
    public String status;
 
@@ -30,5 +30,5 @@ public class Appointment extends PanacheEntityBase {
 
    @ManyToOne
    @JoinColumn(name = "patient_id")
-   public Patient patient;
+   public Paciente paciente;
 }

@@ -21,7 +21,7 @@ import uce.edu.web.api.medical.application.DoctorService;
 import uce.edu.web.api.medical.application.representation.DoctorRepresentation;
 import uce.edu.web.api.medical.application.representation.LinkDto;
 
-@Path("/doctors")
+@Path("/doctores")
 public class DoctorResource {
 
    @Inject 
@@ -45,7 +45,7 @@ public class DoctorResource {
    @GET
    @Path("/{id}")
    @Produces(MediaType.APPLICATION_JSON)
-   //@RolesAllowed({"admin"})
+   @RolesAllowed({"admin"})
    public DoctorRepresentation getById(@PathParam("id") Long id) {
       return this.buildLinks(this.doctorService.getById(id));
    }
@@ -54,7 +54,7 @@ public class DoctorResource {
    @Path("")
    @Consumes(MediaType.APPLICATION_JSON)
    @Produces(MediaType.APPLICATION_JSON)
-   //@RolesAllowed({"admin"})
+   @RolesAllowed({"admin"})
    public Response save(DoctorRepresentation docR) {
       this.doctorService.create(docR);
       return Response.status(Response.Status.CREATED).entity(docR).build();
@@ -64,7 +64,7 @@ public class DoctorResource {
    @Path("/{id}")
    @Produces(MediaType.APPLICATION_JSON)
    @Consumes(MediaType.APPLICATION_JSON)
-   //@RolesAllowed({"admin"})
+   @RolesAllowed({"admin"})
    public Response update(@PathParam("id") Long id, DoctorRepresentation docR) {
       this.doctorService.update(id, docR);
       return Response.status(209).entity(null).build();

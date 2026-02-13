@@ -37,12 +37,12 @@ public class DoctorService {
    public void update(Long id, DoctorRepresentation docR) {
       Doctor doc = this.doctorRepository.findById(id);
       if (doc != null) {
-         doc.firstName = docR.firstName;
-         doc.lastName = docR.lastName;
-         doc.specialty = docR.specialty;
-         doc.officeNumber = docR.officeNumber;
-         doc.phoneNumber = docR.phoneNumber;
-         doc.email = docR.email;         
+         doc.nombre = docR.nombre;
+         doc.apellido = docR.apellido;
+         doc.especialidad = docR.especialidad;
+         doc.numOficina = docR.numOficina;
+         doc.telefono = docR.telefono;
+         doc.email = docR.email;
       }
    }
 
@@ -50,23 +50,23 @@ public class DoctorService {
    public void partialUpdate(Long id, DoctorRepresentation docR) {
       Doctor doc = this.doctorRepository.findById(id);
       if (doc != null) {
-         if (docR.firstName != null) {
-            doc.firstName = docR.firstName;
+         if (docR.nombre != null) {
+            doc.nombre = docR.nombre;
          }
-         if (docR.lastName != null) {
-            doc.lastName = docR.lastName;
+         if (docR.apellido != null) {
+            doc.apellido = docR.apellido;
          }
-         if (docR.specialty != null) {
-            doc.specialty = docR.specialty;            
+         if (docR.especialidad != null) {
+            doc.especialidad = docR.especialidad;
          }
-         if (docR.phoneNumber != null) {
-            doc.phoneNumber = docR.phoneNumber;       
+         if (docR.telefono != null) {
+            doc.telefono = docR.telefono;
          }
-         if (docR.officeNumber != null) {
-            doc.officeNumber = docR.officeNumber;
+         if (docR.numOficina != null) {
+            doc.numOficina = docR.numOficina;
          }
          if (docR.email != null) {
-            doc.email = docR.email;            
+            doc.email = docR.email;
          }
       }
    }
@@ -79,11 +79,11 @@ public class DoctorService {
    private DoctorRepresentation mapper(Doctor doc) {
       DoctorRepresentation docR = new DoctorRepresentation();
       docR.id = doc.id;
-      docR.firstName = doc.firstName;
-      docR.lastName = doc.lastName;
-      docR.specialty = doc.specialty;
-      docR.phoneNumber = doc.phoneNumber;
-      docR.officeNumber = doc.officeNumber;
+      docR.nombre = doc.nombre;
+      docR.apellido = doc.apellido;
+      docR.especialidad = doc.especialidad;
+      docR.telefono = doc.telefono;
+      docR.numOficina = doc.numOficina;
       docR.email = doc.email;
 
       return docR;
@@ -92,11 +92,11 @@ public class DoctorService {
    private Doctor mapperToDoctor(DoctorRepresentation docR) {
       Doctor doc = new Doctor();
       doc.id = docR.id;
-      doc.firstName = docR.firstName;
-      doc.lastName = docR.lastName;
-      doc.specialty = docR.specialty;
-      doc.phoneNumber = docR.phoneNumber;
-      doc.officeNumber = docR.officeNumber;
+      doc.nombre = docR.nombre;
+      doc.apellido = docR.apellido;
+      doc.especialidad = docR.especialidad;
+      doc.telefono = docR.telefono;
+      doc.numOficina = docR.numOficina;
       doc.email = docR.email;
 
       return doc;

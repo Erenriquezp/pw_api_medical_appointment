@@ -6,12 +6,12 @@ import java.util.List;
 public class DoctorRepresentation {
    public Long id;
 
-   public String firstName;
-   public String lastName;
-   public String specialty;
+   public String nombre;
+   public String apellido;
+   public String especialidad;
    public String email;
-   public String phoneNumber;
-   public String officeNumber;   
+   public String telefono;
+   public String numOficina;
 
    public List<LinkDto> links = new ArrayList<>();
 

@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 
@@ -16,10 +17,10 @@ public class Doctor extends PanacheEntityBase {
    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "doctor_seq")
    public Long id;
 
-   public String firstName;
-   public String lastName;
-   public String specialty;
+   public String nombre;
+   public String apellido;
+   public String especialidad;
    public String email;
-   public String phoneNumber;
-   public String officeNumber;   
+   public String telefono;
+   public String numOficina;
 }

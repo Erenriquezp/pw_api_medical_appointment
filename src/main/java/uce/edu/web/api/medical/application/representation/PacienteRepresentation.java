@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatientRepresentation {
+public class PacienteRepresentation {
    public Long id;
-   public String firstName;
-   public String lastName;
-   public LocalDate birthDate;
-   public String phoneNumber;
+   public String nombre;
+   public String apellido;
+   public LocalDate fechaNacimiento;
+   public String telefono;
    public String email;
-   public String address;
+   public String direccion;
 
    public List<LinkDto> links = new ArrayList<>();
 }

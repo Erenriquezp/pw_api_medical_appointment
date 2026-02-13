@@ -10,19 +10,18 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 
-
 @Entity
 @Table(name = "patients")
 @SequenceGenerator(name = "patients_seq", sequenceName = "patients_sequence", allocationSize = 1)
-public class Patient extends PanacheEntityBase {
+public class Paciente extends PanacheEntityBase {
    @Id
    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patients_sequence")
    public Long id;
 
-   public String firstName;
-   public String lastName;
-   public LocalDate birthDate;
-   public String phoneNumber;
+   public String nombre;
+   public String appellido;
+   public LocalDate fechaNacimiento;
+   public String telefono;
    public String email;
-   public String address;
+   public String direccion;
 }

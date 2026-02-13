@@ -9,23 +9,23 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
-import uce.edu.web.api.medical.application.AppointmentService;
-import uce.edu.web.api.medical.application.representation.AppointmentRepresentation;
+import uce.edu.web.api.medical.application.CitaService;
+import uce.edu.web.api.medical.application.representation.CitaRepresentation;
 
-@Path("/appointments")
-public class AppointmentResource {
+@Path("/citas")
+public class CitaResource {
    @Inject
-   AppointmentService appointmentService;
+   CitaService appointmentService;
 
    @GET
-   public List<AppointmentRepresentation> listAll() {
+   public List<CitaRepresentation> listAll() {
       return appointmentService.getAll();
    }
 
    @POST
-   public Response create(AppointmentRepresentation dto) {
+   public Response create(CitaRepresentation dto) {
       try {
-         AppointmentRepresentation created = this.appointmentService.create(dto);
+         CitaRepresentation created = this.appointmentService.create(dto);
          return Response.status(Response.Status.CREATED).entity(created).build();
       } catch (IllegalArgumentException e) {
          return Response.status(Response.Status.BAD_REQUEST).build();
@@ -33,7 +33,7 @@ public class AppointmentResource {
    }
 
    @PATCH
-   @Path("/{id}/cancel")
+   @Path("/{id}/cancelar")
    public Response cancel(@PathParam("id") Long id) {
       appointmentService.cancelAppointment(id);
       return Response.ok().build();

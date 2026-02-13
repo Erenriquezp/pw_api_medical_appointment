@@ -17,15 +17,15 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
-import uce.edu.web.api.medical.application.PatientService;
+import uce.edu.web.api.medical.application.PacienteService;
 import uce.edu.web.api.medical.application.representation.LinkDto;
-import uce.edu.web.api.medical.application.representation.PatientRepresentation;
+import uce.edu.web.api.medical.application.representation.PacienteRepresentation;
 
-@Path("/patients")
-public class PatientResource {
+@Path("/pacientes")
+public class PacienteResource {
  
    @Inject 
-   public PatientService patientService;
+   public PacienteService patientService;
 
    @Inject
    private UriInfo uriInfo;
@@ -33,10 +33,10 @@ public class PatientResource {
    @GET
    @Path("")
    @Produces(MediaType.APPLICATION_JSON)
-   @RolesAllowed({"admin"})
-   public List<PatientRepresentation> listAll() {
-      List<PatientRepresentation> list = new ArrayList<>();
-      for (PatientRepresentation patR : this.patientService.getAll()) {
+   //@RolesAllowed({"admin"})
+   public List<PacienteRepresentation> listAll() {
+      List<PacienteRepresentation> list = new ArrayList<>();
+      for (PacienteRepresentation patR : this.patientService.getAll()) {
          list.add(this.buildLinks(patR));
       }
       return list;
@@ -46,7 +46,7 @@ public class PatientResource {
    @Path("/{id}")
    @Produces(MediaType.APPLICATION_JSON)
    @RolesAllowed({"admin"})
-   public PatientRepresentation getById(@PathParam("id") Long id) {
+   public PacienteRepresentation getById(@PathParam("id") Long id) {
       return this.buildLinks(this.patientService.getById(id));
    }
 
@@ -55,7 +55,7 @@ public class PatientResource {
    @Consumes(MediaType.APPLICATION_JSON)
    @Produces(MediaType.APPLICATION_JSON)
    @RolesAllowed({"admin"})
-   public Response save(PatientRepresentation docR) {
+   public Response save(PacienteRepresentation docR) {
       this.patientService.create(docR);
       return Response.status(Response.Status.CREATED).entity(docR).build();
    }
@@ -65,7 +65,7 @@ public class PatientResource {
    @Produces(MediaType.APPLICATION_JSON)
    @Consumes(MediaType.APPLICATION_JSON)
    @RolesAllowed({"admin"})
-   public Response update(@PathParam("id") Long id, PatientRepresentation patR) {
+   public Response update(@PathParam("id") Long id, PacienteRepresentation patR) {
       this.patientService.update(id, patR);
       return Response.status(209).entity(null).build();
    }
@@ -75,7 +75,7 @@ public class PatientResource {
    @Produces(MediaType.APPLICATION_JSON)
    @Consumes(MediaType.APPLICATION_JSON)
    @RolesAllowed({"admin"})
-   public Response partialUpdate(@PathParam("id") Long id, PatientRepresentation patR) {
+   public Response partialUpdate(@PathParam("id") Long id, PacienteRepresentation patR) {
       this.patientService.partialUpdate(id, patR);
       return Response.status(204).entity(null).build();
    }
@@ -87,9 +87,9 @@ public class PatientResource {
       this.patientService.delete(id);
    }
 
-   private PatientRepresentation buildLinks(PatientRepresentation patR) {
+   private PacienteRepresentation buildLinks(PacienteRepresentation patR) {
       String self = this.uriInfo.getBaseUriBuilder()
-               .path(DoctorResource.class)
+               .path(PacienteResource.class)
                .path(String.valueOf(patR.id))
                .build()
                .toString();
