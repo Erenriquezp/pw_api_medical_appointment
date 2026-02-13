@@ -12,6 +12,7 @@ public class PacienteRepresentation {
    public String telefono;
    public String email;
    public String direccion;
+   public String status;
 
    public List<LinkDto> links = new ArrayList<>();
 }

@@ -45,6 +45,7 @@ public class DoctorService {
          doc.numOficina = docR.numOficina;
          doc.telefono = docR.telefono;
          doc.email = docR.email;
+         doc.status = docR.status;
          return this.mapper(doc);
       }
       return null;
@@ -72,6 +73,7 @@ public class DoctorService {
          if (docR.email != null) {
             doc.email = docR.email;
          }
+
          return this.mapper(doc);
       }
       return null;
@@ -79,7 +81,10 @@ public class DoctorService {
 
    @Transactional
    public void delete(Long id) {
-      this.doctorRepository.deleteById(id);
+      Doctor doc = this.doctorRepository.findById(id);
+      if (doc != null) {
+         doc.status = "INACTIVO";
+      }
    }
 
    private DoctorRepresentation mapper(Doctor doc) {
@@ -91,7 +96,7 @@ public class DoctorService {
       docR.telefono = doc.telefono;
       docR.numOficina = doc.numOficina;
       docR.email = doc.email;
-
+      docR.status = doc.status;
       return docR;
    }
 
@@ -104,7 +109,7 @@ public class DoctorService {
       doc.telefono = docR.telefono;
       doc.numOficina = docR.numOficina;
       doc.email = docR.email;
-
+      doc.status = docR.status;
       return doc;
    }
 }

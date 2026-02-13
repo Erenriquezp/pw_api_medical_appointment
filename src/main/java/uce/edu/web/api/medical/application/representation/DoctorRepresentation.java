@@ -12,6 +12,7 @@ public class DoctorRepresentation {
    public String email;
    public String telefono;
    public String numOficina;
+   public String status;
 
    public List<LinkDto> links = new ArrayList<>();
 

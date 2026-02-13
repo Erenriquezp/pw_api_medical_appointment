@@ -79,7 +79,10 @@ public class PacienteService {
 
    @Transactional
    public void delete(Long id) {
-      this.patientRepository.deleteById(id);
+      Paciente patient = this.patientRepository.findById(id);
+      if (patient != null) {
+         patient.status = "INACTIVO";
+      }
    }
 
    private PacienteRepresentation mapper(Paciente patient) {
@@ -91,7 +94,7 @@ public class PacienteService {
       patientR.direccion = patient.direccion;
       patientR.email = patient.email;
       patientR.telefono = patient.telefono;
-
+      patientR.status = patient.status;
       return patientR;
    }
 
@@ -104,7 +107,7 @@ public class PacienteService {
       patient.direccion = patientR.direccion;
       patient.email = patientR.email;
       patient.telefono = patientR.telefono;
-
+      patient.status = patientR.status;
       return patient;
    }
 }

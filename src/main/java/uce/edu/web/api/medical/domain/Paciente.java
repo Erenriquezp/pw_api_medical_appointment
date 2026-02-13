@@ -24,4 +24,6 @@ public class Paciente extends PanacheEntityBase {
    public String telefono;
    public String email;
    public String direccion;
+   public String status = "ACTIVO";
+
 }

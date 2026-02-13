@@ -5,11 +5,11 @@ VALUES (2, 'Bruno', 'Garcia', 'Pediatria', 'bruno.garcia@clinic.com', '099222222
 INSERT INTO doctors (id, nombre, apellido, especialidad, email, telefono, numOficina)
 VALUES (3, 'Carla', 'Mendez', 'Dermatologia', 'carla.mendez@clinic.com', '0993333333', 'C-303');
 
-INSERT INTO patients (id, nombre, appellido, fechaNacimiento, telefono, email, direccion)
+INSERT INTO patients (id, nombre, apellido, fechaNacimiento, telefono, email, direccion)
 VALUES (1, 'Diego', 'Perez', '1992-05-14', '0981111111', 'diego.perez@mail.com', 'Av. 10 de Agosto 123');
-INSERT INTO patients (id, nombre, appellido, fechaNacimiento, telefono, email, direccion)
+INSERT INTO patients (id, nombre, apellido, fechaNacimiento, telefono, email, direccion)
 VALUES (2, 'Elena', 'Vargas', '1987-11-30', '0982222222', 'elena.vargas@mail.com', 'Calle Quito 456');
-INSERT INTO patients (id, nombre, appellido, fechaNacimiento, telefono, email, direccion)
+INSERT INTO patients (id, nombre, apellido, fechaNacimiento, telefono, email, direccion)
 VALUES (3, 'Fabian', 'Rojas', '2000-02-02', '0983333333', 'fabian.rojas@mail.com', 'Av. America 789');
 
 INSERT INTO appointments (id, fechaCita, status, doctor_id, patient_id)
